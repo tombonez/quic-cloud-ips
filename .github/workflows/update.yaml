@@ -1,8 +1,8 @@
-name: Check API and commit changes
+name: Update IP List
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: "0 * * * *"
 
 jobs:
   update:
