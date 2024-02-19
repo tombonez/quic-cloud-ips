@@ -1,0 +1,22 @@
+name: Check API and commit changes
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Download IP List
+        run: |
+          curl --retry 3 --retry-connrefused --retry-delay 5 --max-time 30 -o ips.txt https://www.quic.cloud/ips\?ln
+
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5.0.0
+        with:
+          commit_message: "chore: update ip list"
